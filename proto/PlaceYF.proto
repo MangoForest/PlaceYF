@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+service Position{
+  rpc GetPosition(Empty)returns(Pos){}
+  rpc SetPosition(Pos)returns(Empty){}
+  rpc SetPlaceAnywhere(SetAny)returns(Empty){}
+  rpc ShutDown(Empty)returns(Empty){}
+}
+
+message Empty {}
+
+message SetAny{
+  bool set_anywhere=1;
+}
+
+message Pos{
+  float x=1;
+  float y=2;
+  float z=3;
+}
