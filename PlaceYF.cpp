@@ -1,13 +1,13 @@
 #include "PlaceYF.h"
 
-bool PlaceYF::Dll_Injection(const wchar_t *dll_name, const char processname[])
+bool PlaceYF::Dll_Injection(const char *dll_name, const char processname[])
 {
-    wchar_t lpdllpath[MAX_PATH];
-    wchar_t lpdlldir[MAX_PATH];
-    GetFullPathNameW(dll_name, MAX_PATH, lpdllpath, nullptr);
-    wcscpy(lpdlldir,lpdllpath);
-    for(int i= wcslen(lpdlldir)-1;i>=0;--i){
-        if (lpdlldir[i]!=L'\\') {
+    char lpdllpath[MAX_PATH];
+    char lpdlldir[MAX_PATH];
+    GetFullPathName(dll_name, MAX_PATH, lpdllpath, nullptr);
+    strcpy(lpdlldir,lpdllpath);
+    for(int i= strlen(lpdlldir)-1;i>=0;--i){
+        if (lpdlldir[i]!='\\') {
             lpdlldir[i]=0;
         }
         else{
@@ -45,8 +45,8 @@ bool PlaceYF::Dll_Injection(const wchar_t *dll_name, const char processname[])
     {
         return false;
     }
-    auto size = (wcslen(lpdllpath)+1)* sizeof(wchar_t );
-    auto dirsize=(wcslen(lpdlldir)+1)* sizeof(wchar_t );
+    auto size = (strlen(lpdllpath)+1)* sizeof(char );
+    auto dirsize=(strlen(lpdlldir)+1)* sizeof(char );
     auto pNameInVictimProcess = VirtualAllocEx(hVictimProcess,nullptr,size,MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
     auto pSetDllDir=VirtualAllocEx(hVictimProcess,nullptr,dirsize,MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
     if (pNameInVictimProcess == nullptr)
@@ -72,8 +72,8 @@ bool PlaceYF::Dll_Injection(const wchar_t *dll_name, const char processname[])
     {
         return FALSE;
     }
-    auto LoadLibraryAddress = GetProcAddress(hKernel32, "LoadLibraryW");
-    auto SetDllDirectoryWAddress = GetProcAddress(hKernel32, "SetDllDirectoryW");
+    auto LoadLibraryAddress = GetProcAddress(hKernel32, "LoadLibraryA");
+    auto SetDllDirectoryWAddress = GetProcAddress(hKernel32, "SetDllDirectoryA");
     if (LoadLibraryAddress == nullptr ||SetDllDirectoryWAddress== nullptr)
     {
         return FALSE;

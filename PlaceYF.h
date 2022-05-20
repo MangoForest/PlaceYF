@@ -13,7 +13,7 @@ public:
     void writePos(float x,float y, float z);
     void setPlaceAnywhere(bool f);
     void shutDown();
-    static bool Dll_Injection(const wchar_t *dll_name,const char processname[]);
+    static bool Dll_Injection(const char *dll_name,const char processname[]);
 private:
     std::unique_ptr<Position::Stub>stub_;
 };

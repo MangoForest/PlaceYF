@@ -4,16 +4,15 @@
 #include <nana/gui/widgets/textbox.hpp>
 #include <nana/gui/widgets/button.hpp>
 #include <nana/gui/timer.hpp>
-#include <nana/gui/detail/native_window_interface.hpp>
 #include "PlaceYF.h"
 
 using namespace nana;
 
 int main() {
-    if(!PlaceYF::Dll_Injection(L"libHouseMemory.dll","ffxiv_dx11.exe")){
+    if(!PlaceYF::Dll_Injection("libHouseMemory.dll","ffxiv_dx11.exe")){
         return 0;
     };
-    PlaceYF place_client("127.0.0.1:51031");
+    PlaceYF place_client("127.0.0.1:8932");
     form fm( API::make_center(300, 180),appearance(true, true, true, false, false, false, false));
     fm.icon(paint::image("64.ico"));
     fm.caption("PlaceYF");

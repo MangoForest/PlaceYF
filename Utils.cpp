@@ -97,7 +97,7 @@ SigScanner::SigScanner() {
     bool ret = Module32First(tl_snap, &me32);
     bool found = false;
     while (ret) {
-        if (strcmp(me32.szModule, "") == 0 || strcmp(me32.szExePath, buffer) == 0) {
+        if (strcmp(me32.szExePath, buffer) == 0) {
             found = true;
             break;
         }

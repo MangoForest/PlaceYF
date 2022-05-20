@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(proto)
 find_package(absl REQUIRED)
+
 add_library(grpc_proto
         proto/PlaceYF.grpc.pb.h
         proto/PlaceYF.grpc.pb.cc
@@ -17,6 +18,8 @@ target_link_libraries(grpc_proto
         libprotobuf
         absl::synchronization
         )
+
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lpthread")
 
 add_library(HouseMemory SHARED HouseMemory.cpp Utils.cpp Utils.h)
 target_link_libraries(HouseMemory grpc_proto)
