@@ -13,14 +13,7 @@ A tool in ffxiv to help to place furniture.
 MSYS2 下的 MinGW-w64
 #### 依赖
 Nana, gRPC
-#### 一些脚本
-```shell
-$ protoc --proto_path=proto --cpp_out=./proto/ proto/PlaceYF.proto
-$ protoc --proto_path=proto --grpc_out=./proto/ --plugin=protoc-gen-grpc=`which grpc_cpp_plugin.exe` proto/PlaceYF.proto
 
-$ ldd libHouseMemory.dll | grep '\/mingw.*\.dll' -o | xargs -I{} cp "{}" ./
-$ ldd PlaceYF.exe | grep '\/mingw.*\.dll' -o | xargs -I{} cp "{}" ./bin
-```
 
 
 ***
