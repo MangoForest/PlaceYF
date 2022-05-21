@@ -57,12 +57,11 @@ grpc::Status HouseMemory::SetPosition(grpc::ServerContext *context, const Pos *r
 
 grpc::Status HouseMemory::SetPlaceAnywhere(grpc::ServerContext *context, const SetAny *request, Empty *response) {
     if(request->set_anywhere()){
-    setPlaceAnywhere(true);
+        setPlaceAnywhere(true);
     }else{
         setPlaceAnywhere(false);
     }
     return grpc::Status::OK;
-    return grpc::Status::CANCELLED;
 }
 
 void HouseMemory::setPlaceAnywhere(bool set_any) const {
@@ -90,6 +89,7 @@ void HouseMemory::setPlaceAnywhere(bool set_any) const {
     VirtualProtect((LPVOID)showcase_anywhere_place, 1, PAGE_EXECUTE_READWRITE,&oldProtection);
     memcpy((byte*)showcase_anywhere_place,to_write,6);
     VirtualProtect((LPVOID)showcase_anywhere_place, 1, oldProtection, &_);
+    delete []to_write;
 }
 
 grpc::Status HouseMemory::ShutDown(grpc::ServerContext *context, const Empty *request, Empty *response) {
