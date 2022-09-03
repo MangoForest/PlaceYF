@@ -97,12 +97,13 @@ bool PlaceYF::Dll_Injection(const char *dll_name, const char processname[])
     return true;
 }
 
-void PlaceYF::writePos(float x,float y, float z) {
+void PlaceYF::writePos(float x,float y, float z, float r) {
     grpc::ClientContext ctx;
     Pos pos;
     pos.set_x(x);
     pos.set_y(y);
     pos.set_z(z);
+    pos.set_r(r);
     Empty empty;
     grpc::Status status=stub_->SetPosition(&ctx,pos,&empty);
     if (!status.ok()){
@@ -117,9 +118,9 @@ std::vector<float> PlaceYF::getPos() {
     grpc::Status status=stub_->GetPosition(&ctx,empty,&pos);
     if (!status.ok()){
 //        std::cout << "getPos rpc failed." << std::endl;
-        return {0,0,0};
+        return {0,0,0,0};
     }
-    return {pos.x(),pos.y(),pos.z()};
+    return {pos.x(),pos.y(),pos.z(),pos.r()};
 }
 
 void PlaceYF::setPlaceAnywhere(bool f) {

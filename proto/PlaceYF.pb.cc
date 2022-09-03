@@ -43,7 +43,8 @@ constexpr Pos::Pos(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : x_(0)
   , y_(0)
-  , z_(0){}
+  , z_(0)
+  , r_(0){}
 struct PosDefaultTypeInternal {
   constexpr PosDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -77,6 +78,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_PlaceYF_2eproto::offsets[] PRO
   PROTOBUF_FIELD_OFFSET(::Pos, x_),
   PROTOBUF_FIELD_OFFSET(::Pos, y_),
   PROTOBUF_FIELD_OFFSET(::Pos, z_),
+  PROTOBUF_FIELD_OFFSET(::Pos, r_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::Empty)},
@@ -92,16 +94,16 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_PlaceYF_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\rPlaceYF.proto\"\007\n\005Empty\"\036\n\006SetAny\022\024\n\014se"
-  "t_anywhere\030\001 \001(\010\"&\n\003Pos\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030"
-  "\002 \001(\002\022\t\n\001z\030\003 \001(\0022\215\001\n\010Position\022\035\n\013GetPosi"
-  "tion\022\006.Empty\032\004.Pos\"\000\022\035\n\013SetPosition\022\004.Po"
-  "s\032\006.Empty\"\000\022%\n\020SetPlaceAnywhere\022\007.SetAny"
-  "\032\006.Empty\"\000\022\034\n\010ShutDown\022\006.Empty\032\006.Empty\"\000"
-  "b\006proto3"
+  "t_anywhere\030\001 \001(\010\"1\n\003Pos\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030"
+  "\002 \001(\002\022\t\n\001z\030\003 \001(\002\022\t\n\001r\030\004 \001(\0022\215\001\n\010Position"
+  "\022\035\n\013GetPosition\022\006.Empty\032\004.Pos\"\000\022\035\n\013SetPo"
+  "sition\022\004.Pos\032\006.Empty\"\000\022%\n\020SetPlaceAnywhe"
+  "re\022\007.SetAny\032\006.Empty\"\000\022\034\n\010ShutDown\022\006.Empt"
+  "y\032\006.Empty\"\000b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_PlaceYF_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_PlaceYF_2eproto = {
-  false, false, 248, descriptor_table_protodef_PlaceYF_2eproto, "PlaceYF.proto", 
+  false, false, 259, descriptor_table_protodef_PlaceYF_2eproto, "PlaceYF.proto", 
   &descriptor_table_PlaceYF_2eproto_once, nullptr, 0, 3,
   schemas, file_default_instances, TableStruct_PlaceYF_2eproto::offsets,
   file_level_metadata_PlaceYF_2eproto, file_level_enum_descriptors_PlaceYF_2eproto, file_level_service_descriptors_PlaceYF_2eproto,
@@ -475,16 +477,16 @@ Pos::Pos(const Pos& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&x_, &from.x_,
-    static_cast<size_t>(reinterpret_cast<char*>(&z_) -
-    reinterpret_cast<char*>(&x_)) + sizeof(z_));
+    static_cast<size_t>(reinterpret_cast<char*>(&r_) -
+    reinterpret_cast<char*>(&x_)) + sizeof(r_));
   // @@protoc_insertion_point(copy_constructor:Pos)
 }
 
 void Pos::SharedCtor() {
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
     reinterpret_cast<char*>(&x_) - reinterpret_cast<char*>(this)),
-    0, static_cast<size_t>(reinterpret_cast<char*>(&z_) -
-    reinterpret_cast<char*>(&x_)) + sizeof(z_));
+    0, static_cast<size_t>(reinterpret_cast<char*>(&r_) -
+    reinterpret_cast<char*>(&x_)) + sizeof(r_));
 }
 
 Pos::~Pos() {
@@ -514,8 +516,8 @@ void Pos::Clear() {
   (void) cached_has_bits;
 
   ::memset(&x_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&z_) -
-      reinterpret_cast<char*>(&x_)) + sizeof(z_));
+      reinterpret_cast<char*>(&r_) -
+      reinterpret_cast<char*>(&x_)) + sizeof(r_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -543,6 +545,13 @@ const char* Pos::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::intern
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
           z_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
+      // float r = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 37)) {
+          r_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else goto handle_unusual;
         continue;
@@ -593,6 +602,12 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_z(), target);
   }
 
+  // float r = 4;
+  if (!(this->r() <= 0 && this->r() >= 0)) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->_internal_r(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -621,6 +636,11 @@ size_t Pos::ByteSizeLong() const {
 
   // float z = 3;
   if (!(this->z() <= 0 && this->z() >= 0)) {
+    total_size += 1 + 4;
+  }
+
+  // float r = 4;
+  if (!(this->r() <= 0 && this->r() >= 0)) {
     total_size += 1 + 4;
   }
 
@@ -664,6 +684,9 @@ void Pos::MergeFrom(const Pos& from) {
   if (!(from.z() <= 0 && from.z() >= 0)) {
     _internal_set_z(from._internal_z());
   }
+  if (!(from.r() <= 0 && from.r() >= 0)) {
+    _internal_set_r(from._internal_r());
+  }
 }
 
 void Pos::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -688,8 +711,8 @@ void Pos::InternalSwap(Pos* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Pos, z_)
-      + sizeof(Pos::z_)
+      PROTOBUF_FIELD_OFFSET(Pos, r_)
+      + sizeof(Pos::r_)
       - PROTOBUF_FIELD_OFFSET(Pos, x_)>(
           reinterpret_cast<char*>(&x_),
           reinterpret_cast<char*>(&other->x_));
