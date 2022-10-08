@@ -28,3 +28,10 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows")
 
 add_executable(PlaceYF main.cpp PlaceYF.cpp main.rc)
 target_link_libraries(PlaceYF grpc_proto nana png jpeg)
+
+#[[
+add_custom_command(
+        TARGET PlaceYF POST_BUILD
+        COMMAND ldd PlaceYF.exe | awk '{print $3}' | xargs -i cp -L {} ./
+)
+]]

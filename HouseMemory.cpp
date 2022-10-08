@@ -28,8 +28,12 @@ grpc::Status HouseMemory::GetPosition(grpc::ServerContext *context, const Empty 
         if (*(intptr_t *) item_ptr != 0) {
             auto pos = (float *) (*(intptr_t *) item_ptr + 0x50);
             response->set_x(pos[0]);
-            response->set_y(pos[2]);
-            response->set_z(pos[1]);
+            response->set_y(pos[1]);
+            response->set_z(pos[2]);
+            auto quat = (float *) (*(intptr_t *) item_ptr + 0x60);
+            auto rad = 2.0 * asinf(quat[1]);
+            response->set_r(rad);
+
             return grpc::Status::OK;
         }
     }
@@ -47,8 +51,12 @@ grpc::Status HouseMemory::SetPosition(grpc::ServerContext *context, const Pos *r
             return grpc::Status::CANCELLED;
         auto pos = (float*)(*(intptr_t*)item_ptr+0x50);
         pos[0]=request->x();
-        pos[1]=request->z();
-        pos[2]=request->y();
+        pos[1]=request->y();
+        pos[2]=request->z();
+        auto quat = (float *) (*(intptr_t *) item_ptr + 0x60);
+        auto rad = request->r();
+        quat[1] = sinf(rad / 2.0);
+        quat[3] = cosf(rad / 2.0);
         return grpc::Status::OK;
     } catch (std::exception &e) {
     }

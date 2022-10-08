@@ -10,7 +10,7 @@ class PlaceYF{
 public:
     explicit PlaceYF(std::string address);
     std::vector<float> getPos();
-    void writePos(float x,float y, float z);
+    void writePos(float x,float y, float z, float r);
     void setPlaceAnywhere(bool f);
     void shutDown();
     static bool Dll_Injection(const char *dll_name,const char processname[]);

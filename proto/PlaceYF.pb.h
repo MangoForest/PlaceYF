@@ -429,6 +429,7 @@ class Pos PROTOBUF_FINAL :
     kXFieldNumber = 1,
     kYFieldNumber = 2,
     kZFieldNumber = 3,
+    kRFieldNumber = 4,
   };
   // float x = 1;
   void clear_x();
@@ -457,6 +458,15 @@ class Pos PROTOBUF_FINAL :
   void _internal_set_z(float value);
   public:
 
+  // float r = 4;
+  void clear_r();
+  float r() const;
+  void set_r(float value);
+  private:
+  float _internal_r() const;
+  void _internal_set_r(float value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Pos)
  private:
   class _Internal;
@@ -467,6 +477,7 @@ class Pos PROTOBUF_FINAL :
   float x_;
   float y_;
   float z_;
+  float r_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_PlaceYF_2eproto;
 };
@@ -567,6 +578,26 @@ inline void Pos::_internal_set_z(float value) {
 inline void Pos::set_z(float value) {
   _internal_set_z(value);
   // @@protoc_insertion_point(field_set:Pos.z)
+}
+
+// float r = 4;
+inline void Pos::clear_r() {
+  r_ = 0;
+}
+inline float Pos::_internal_r() const {
+  return r_;
+}
+inline float Pos::r() const {
+  // @@protoc_insertion_point(field_get:Pos.r)
+  return _internal_r();
+}
+inline void Pos::_internal_set_r(float value) {
+  
+  r_ = value;
+}
+inline void Pos::set_r(float value) {
+  _internal_set_r(value);
+  // @@protoc_insertion_point(field_set:Pos.r)
 }
 
 #ifdef __GNUC__
